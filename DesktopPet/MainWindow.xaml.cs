@@ -189,11 +189,11 @@ namespace DesktopPet
             if (level < 0) level = 1; // 保险：万一当前尺寸不在档位里，默认中
 
             string dir = System.IO.Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "DesktopPet");
+                AppDomain.CurrentDomain.BaseDirectory,
+                "Data");
             System.IO.Directory.CreateDirectory(dir);
 
-            string file = System.IO.Path.Combine(dir, "pos.txt");
+            string file = System.IO.Path.Combine(dir, "pos.dat");
             System.IO.File.WriteAllText(file, $"{Left},{Top},{level}");
         }
         private bool LoadPosition(out double left, out double top, out int level)
@@ -201,8 +201,7 @@ namespace DesktopPet
             left = 0; top = 0; level = 1;
 
             string file = System.IO.Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "DesktopPet", "pos.txt");
+                AppDomain.CurrentDomain.BaseDirectory,"Data","pos.dat");
 
             if (!System.IO.File.Exists(file)) return false;
 
@@ -219,8 +218,7 @@ namespace DesktopPet
         //警告信息
         private static string WarnFlagFile =>
             System.IO.Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "DesktopPet", "warn.txt");
+                AppDomain.CurrentDomain.BaseDirectory,"Data", "warn.dat");
 
         private bool LoadWarnFlag()
         {
@@ -230,8 +228,9 @@ namespace DesktopPet
 
         private void SaveWarnFlag(bool on)
         {
-            System.IO.Directory.CreateDirectory(
-                System.IO.Path.GetDirectoryName(WarnFlagFile)!);
+            string dir = System.IO.Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory, "Data");
+            System.IO.Directory.CreateDirectory(dir);
             System.IO.File.WriteAllText(WarnFlagFile, on ? "1" : "0");
         }
         private void OnWarnToggle(object sender, RoutedEventArgs e)
