@@ -12,6 +12,7 @@ namespace DesktopPet
         private BitmapImage[] _frames;
         private static readonly int[] SizeLevels = { 200, 320, 420 };
 
+        private string _pastcurrentpath = "";
         private string _currentPath = ""; 
         
         private DispatcherTimer _sadTimer;
@@ -104,6 +105,7 @@ namespace DesktopPet
         {
             if (string.IsNullOrEmpty((_currentPath)))
                 _currentPath = "TH6/Rumia";
+            
             string[] files =
             {
                 "1.png",
@@ -140,6 +142,11 @@ namespace DesktopPet
             else
             {
                 MessageBox.Show("找不到当前角色路径");
+                if (!string.IsNullOrEmpty(_pastcurrentpath)&&_currentPath!=_pastcurrentpath)
+                {
+                    _currentPath=_pastcurrentpath;
+                    LoadImage();
+                }
             }
         }
 // 样式切换实现
@@ -244,6 +251,7 @@ namespace DesktopPet
           var item = (MenuItem)sender;
           string tag  = (string)item.Tag;
           string [] parts = tag.Split('-');
+          _pastcurrentpath = _currentPath;
           _currentPath = $"TH{parts[0]}/{parts[1]}";
           LoadImage();
 
