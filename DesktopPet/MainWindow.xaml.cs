@@ -9,8 +9,10 @@ namespace DesktopPet
 {
     public partial class MainWindow : Window
     {
-        private readonly BitmapImage[] _frames;
+        private BitmapImage[] _frames;
         private static readonly int[] SizeLevels = { 200, 320, 420 };
+
+        private string _currentPath = ""; 
         
         private DispatcherTimer _sadTimer;
         private int _currentFrame = 0;
@@ -18,6 +20,7 @@ namespace DesktopPet
         public MainWindow()
         {
             InitializeComponent();
+            LoadImage();
             WarnItem.IsChecked = LoadWarnFlag();
             //鼠标拖拽
             MouseLeftButtonDown += (s, e) => DragMove();
@@ -91,29 +94,53 @@ namespace DesktopPet
             }
             //关闭时处方保存函数
             Closing += (s, e) => SavePosition();
-
+            
+            
+            
+            
+        }
+        //加载图片
+        private void LoadImage()
+        {
+            if (string.IsNullOrEmpty((_currentPath)))
+                _currentPath = "TH6/Rumia";
             string[] files =
             {
-                "NewDirectory1/052_00.png",
-                "NewDirectory1/052_01.png",
-                "NewDirectory1/052_02.png",
-                "NewDirectory1/052_03.png",
-                "NewDirectory1/052_04.png"
+                "1.png",
+                "2.png",
+                "3.png",
+                "4.png",
+                "5.png"
             };
 
             _frames = new BitmapImage[files.Length];
             for (int i = 0; i < files.Length; i++)
             {
-                var bmp = new BitmapImage();
-                bmp.BeginInit();
-                bmp.UriSource = new Uri("pack://application:,,,/" + files[i], UriKind.Absolute);
-                bmp.CacheOption = BitmapCacheOption.OnLoad;
-                bmp.EndInit();
-                bmp.Freeze();
-                _frames[i] = bmp;
+                try
+                {
+                    var bmp = new BitmapImage();
+                    bmp.BeginInit();
+                    bmp.UriSource = new Uri("pack://application:,,,/ResImage/" +_currentPath+"/" +files[i], UriKind.Absolute);
+                    bmp.CacheOption = BitmapCacheOption.OnLoad;
+                    bmp.EndInit();
+                    bmp.Freeze();
+                    _frames[i] = bmp;
+                }
+                catch
+                {
+                    _frames[i] = null;
+                }
+               
             }
 
-            PetImage.Source = _frames[0];
+            if (_frames[0] !=null)
+            {
+                PetImage.Source = _frames[0];
+            }
+            else
+            {
+                MessageBox.Show("找不到当前角色路径");
+            }
         }
 // 样式切换实现
         private void OnMenuItemClick(object sender, RoutedEventArgs e)
@@ -211,5 +238,16 @@ namespace DesktopPet
         {
             SaveWarnFlag(WarnItem.IsChecked);
         }
+
+      //角色切换实现
+      private void ChangeCharaterClick(object sender,RoutedEventArgs e)
+      {
+          var item = (MenuItem)sender;
+          string tag  = (string)item.Tag;
+          string [] parts = tag.Split('-');
+          _currentPath = $"TH{parts[0]}/{parts[1]}";
+          LoadImage();
+
+      }
     }
 }

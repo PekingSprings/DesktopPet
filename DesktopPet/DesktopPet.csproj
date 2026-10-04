@@ -11,15 +11,41 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Resource Include="NewDirectory1\052_00.png" />
-        <Resource Include="NewDirectory1\052_01.png" />
-        <Resource Include="NewDirectory1\052_02.png" />
-        <Resource Include="NewDirectory1\052_03.png" />
-        <Resource Include="NewDirectory1\052_04.png" />
+        <Resource Include="ResImage\TH6\Rumia\1.png" />
+        <Resource Include="ResImage\TH6\Rumia\2.png" />
+        <Resource Include="ResImage\TH6\Rumia\3.png" />
+        <Resource Include="ResImage\TH6\Rumia\4.png" />
+        <Resource Include="ResImage\TH6\Rumia\5.png" />
+        <Resource Include="ResImage\TH6\Rumia\sup.png" />
+
+        <Resource Include="ResImage\TH6\Cirno\1.png" />
+
+        <Resource Include="ResImage\TH6\Cirno\2.png" />
+
+        <Resource Include="ResImage\TH6\Cirno\3.png" />
+
+        <Resource Include="ResImage\TH6\Cirno\4.png" />
+
+        <Resource Include="ResImage\TH6\Cirno\5.png" />
+
+        <Resource Include="ResImage\TH7\Youmu\1.png" />
+
+        <Resource Include="ResImage\TH7\Youmu\2.png" />
+
+        <Resource Include="ResImage\TH7\Youmu\3.png" />
+
+        <Resource Include="ResImage\TH7\Youmu\4.png" />
+
+        <Resource Include="ResImage\TH7\Youmu\5.png" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="ModernWpfUI" Version="0.9.6" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="ResImage\TH6\Rumia\" />
+      <Folder Include="ResImage\TH8\" />
     </ItemGroup>
 
 </Project>

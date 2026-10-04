@@ -23,6 +23,16 @@
                     <MenuItem Header="中" Tag="320" Click="OnSizeClick"/>
                     <MenuItem Header="大" Tag="420" Click="OnSizeClick"/>
                 </MenuItem>
+                <MenuItem Header="角色">
+                    <MenuItem Header="TH6">
+                        <MenuItem Header="露米娅" Tag="6-Rumia" Click="ChangeCharaterClick"/>
+                        <MenuItem Header="琪露诺" Tag="6-Cirno" Click="ChangeCharaterClick"/>
+                        <MenuItem Header="芙兰朵露" Tag="6-Flandre" Click="ChangeCharaterClick"/>
+                    </MenuItem>
+                    <MenuItem Header="TH7">
+                        <MenuItem Header="魂魄妖梦" Tag="7-Youmu" Click="ChangeCharaterClick"/>
+                    </MenuItem>
+                </MenuItem>
                 <MenuItem Header="样式">
                     <MenuItem Header="常服" Tag="0" Click="OnMenuItemClick"/>
                     <MenuItem Header="生气" Tag="1" Click="OnMenuItemClick"/>
@@ -43,7 +53,6 @@
             </ContextMenu>
         </Grid.ContextMenu>
         <Image 
-            x:Name="PetImage"
-            Source="E:/WPF/WpfApp2/WpfApp2/NewDirectory1/052_00.png"></Image>
+            x:Name="PetImage" Stretch="Uniform"></Image>
     </Grid>
 </Window>
