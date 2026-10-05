@@ -49,6 +49,8 @@
                 <MenuItem x:Name="TopmostItem" Header="置顶"
                           IsCheckable="True" IsChecked="True" Click="OnTopmostToggle"/>
                 <Separator/>
+                <MenuItem x:Name="ExternalMenu" Header="外部角色"/>
+                <Separator/>
                 <MenuItem Header="退出" Click="OnExitClick"/>
             </ContextMenu>
         </Grid.ContextMenu>

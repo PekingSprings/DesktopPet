@@ -7,6 +7,7 @@ using System.Windows.Threading;
 
 namespace DesktopPet
 {
+    //加载图片，拖拽，存储位置，警告信息，改变角色
     public partial class MainWindow : Window
     {
         private BitmapImage[] _frames;
@@ -15,13 +16,15 @@ namespace DesktopPet
         private string _pastcurrentpath = "";
         private string _currentPath = ""; 
         
+        private string _externalFolder =>
+            System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ExternalChars");
+        
         private DispatcherTimer _sadTimer;
         private int _currentFrame = 0;
 
         public MainWindow()
         {
             InitializeComponent();
-            LoadImage();
             WarnItem.IsChecked = LoadWarnFlag();
             //鼠标拖拽
             MouseLeftButtonDown += (s, e) => DragMove();
@@ -81,11 +84,12 @@ namespace DesktopPet
             };
             
             
-            //定位上一次桌宠位置，桌宠大小
-            if (LoadPosition(out double l, out double t, out int lv))
+            //定位上一次桌宠位置，桌宠大小,桌宠样式
+            if (LoadPosition(out double l, out double t, out int lv,out string ch))
             {
                 Left = l;
                 Top = t;
+                _currentPath = ch;
 
                 int size = SizeLevels[lv];
                 Width = size;
@@ -93,9 +97,16 @@ namespace DesktopPet
                 PetImage.Width = size;
                 PetImage.Height = size;
             }
+            
+            LoadImage();
+            BuildMenu();
             //关闭时处方保存函数
             Closing += (s, e) => SavePosition();
             
+            
+            
+            // Console.WriteLine(ch.GetType());
+            // Console.WriteLine(_currentPath);
             
             
             
@@ -192,6 +203,7 @@ namespace DesktopPet
         
         private void SavePosition()
         {
+            string charter = _currentPath;
             int level = Array.IndexOf(SizeLevels, (int)Width);
             if (level < 0) level = 1; // 保险：万一当前尺寸不在档位里，默认中
 
@@ -201,11 +213,12 @@ namespace DesktopPet
             System.IO.Directory.CreateDirectory(dir);
 
             string file = System.IO.Path.Combine(dir, "pos.dat");
-            System.IO.File.WriteAllText(file, $"{Left},{Top},{level}");
+            System.IO.File.WriteAllText(file, $"{Left},{Top},{level},{charter}");
         }
-        private bool LoadPosition(out double left, out double top, out int level)
+        private bool LoadPosition(out double left, out double top, out int level,out string charter)
         {
             left = 0; top = 0; level = 1;
+            charter = "Rumia/1.png";
 
             string file = System.IO.Path.Combine(
                 AppDomain.CurrentDomain.BaseDirectory,"Data","pos.dat");
@@ -213,11 +226,13 @@ namespace DesktopPet
             if (!System.IO.File.Exists(file)) return false;
 
             string[] parts = System.IO.File.ReadAllText(file).Split(',');
-            if (parts.Length != 3) return false;
+            if (parts.Length != 4) return false;
 
             if (!double.TryParse(parts[0], out left)) return false;
             if (!double.TryParse(parts[1], out top))  return false;
             if (!int.TryParse(parts[2], out level))   return false;
+            if(String.IsNullOrEmpty(parts[3])) return false;
+            charter = parts[3];
             if (level < 0 || level >= SizeLevels.Length) level = 1;
 
             return true;
@@ -255,6 +270,34 @@ namespace DesktopPet
           _currentPath = $"TH{parts[0]}/{parts[1]}";
           LoadImage();
 
+      }
+      
+      //自定义导入图片实现
+      private void BuildMenu()
+      {
+          ExternalMenu.Items.Clear();
+          if (!System.IO.Directory.Exists(_externalFolder))
+          {
+              System.IO.Directory.CreateDirectory(_externalFolder);
+          }
+
+          foreach (string dir in System.IO.Directory.GetDirectories(_externalFolder))
+          {
+              string name = System.IO.Path.GetFileName(dir);
+              var item = new MenuItem { Header = name, Tag = name };
+              item.Click += OnExternalCharacterClick;
+              ExternalMenu.Items.Add(item);
+          }
+          
+      }
+      private void OnExternalCharacterClick(object sender, RoutedEventArgs e)
+      {
+          var item = (MenuItem)sender;
+          string name = (string)item.Tag;
+
+          // 用特殊前缀标记这是外部角色
+          _currentPath = "external:" + name;
+          LoadImage();
       }
     }
 }

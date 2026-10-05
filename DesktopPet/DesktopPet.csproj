@@ -45,6 +45,7 @@
 
     <ItemGroup>
       <Folder Include="Data\" />
+      <Folder Include="ExternalChars\" />
       <Folder Include="ResImage\TH6\Rumia\" />
       <Folder Include="ResImage\TH8\" />
     </ItemGroup>
