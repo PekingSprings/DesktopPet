@@ -106,8 +106,7 @@ namespace DesktopPet
             
             
             // Console.WriteLine(ch.GetType());
-            // Console.WriteLine(_currentPath);
-            
+            Console.WriteLine(_currentPath);
             
             
         }
@@ -115,7 +114,7 @@ namespace DesktopPet
         private void LoadImage()
         {
             if (string.IsNullOrEmpty((_currentPath)))
-                _currentPath = "TH6/Rumia";
+                _currentPath = "internal:TH6/Rumia";
             
             string[] files =
             {
@@ -133,7 +132,15 @@ namespace DesktopPet
                 {
                     var bmp = new BitmapImage();
                     bmp.BeginInit();
-                    bmp.UriSource = new Uri("pack://application:,,,/ResImage/" +_currentPath+"/" +files[i], UriKind.Absolute);
+                    string[] parts = _currentPath.Split(":");
+                    if (parts[0] == "external")
+                    {
+                        bmp.UriSource = new Uri(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"ExternalChars",parts[1],files[i]),UriKind.Absolute);
+                    }
+                    else if (parts[0] == "internal")
+                    {
+                        bmp.UriSource = new Uri("pack://application:,,,/ResImage/" +parts[1]+"/" +files[i], UriKind.Absolute);
+                    }
                     bmp.CacheOption = BitmapCacheOption.OnLoad;
                     bmp.EndInit();
                     bmp.Freeze();
@@ -166,7 +173,14 @@ namespace DesktopPet
             var item = (MenuItem)sender;
             int i = int.Parse((string)item.Tag);
             _currentFrame = i;
-            PetImage.Source = _frames[i];
+            if (_frames[i]==null)
+            {
+                MessageBox.Show("对应样式文件不存在");
+            }
+            else
+            {
+                PetImage.Source = _frames[i];
+            }
         }
         
         private void OnSizeClick(object sender, RoutedEventArgs e)
@@ -218,7 +232,7 @@ namespace DesktopPet
         private bool LoadPosition(out double left, out double top, out int level,out string charter)
         {
             left = 0; top = 0; level = 1;
-            charter = "Rumia/1.png";
+            charter = "internal:Rumia/1.png";
 
             string file = System.IO.Path.Combine(
                 AppDomain.CurrentDomain.BaseDirectory,"Data","pos.dat");
@@ -267,7 +281,7 @@ namespace DesktopPet
           string tag  = (string)item.Tag;
           string [] parts = tag.Split('-');
           _pastcurrentpath = _currentPath;
-          _currentPath = $"TH{parts[0]}/{parts[1]}";
+          _currentPath = $"internal:TH{parts[0]}/{parts[1]}";
           LoadImage();
 
       }
@@ -290,6 +304,7 @@ namespace DesktopPet
           }
           
       }
+      //外部角色切换
       private void OnExternalCharacterClick(object sender, RoutedEventArgs e)
       {
           var item = (MenuItem)sender;
