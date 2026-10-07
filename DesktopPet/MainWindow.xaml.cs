@@ -19,12 +19,15 @@ public partial class MainWindow : Window
     private string _pastcurrentpath = "";
 
     private DispatcherTimer _sadTimer;
-    private BubbleLogic bubb;
+    private BubbleLogic bubblogic;
 
     public MainWindow()
     {
         InitializeComponent();
-        WarnItem.IsChecked = LoadWarnFlag();
+        //气泡ischecked检查
+        var (warn, bubble) = LoadConfig();
+        WarnItem.IsChecked = warn;
+        Bubble.IsChecked = bubble;
         //鼠标拖拽
         MouseLeftButtonDown += (s, e) => DragMove();
         //文件拖拽接受
@@ -99,8 +102,10 @@ public partial class MainWindow : Window
 
         LoadImage();
         BuildMenu();
+        Loaded += (s, e) => OnBubbleLogic();
         //关闭时处方保存函数
         Closing += (s, e) => SavePosition();
+        Closing += (s, e) => SaveConfig();
 
 
         // Console.WriteLine(ch.GetType());
@@ -113,7 +118,7 @@ public partial class MainWindow : Window
     //警告信息
     private static string WarnFlagFile =>
         Path.Combine(
-            AppDomain.CurrentDomain.BaseDirectory, "Data", "warn.dat");
+            AppDomain.CurrentDomain.BaseDirectory, "Data", "config.dat");
 
     //加载图片
     private void LoadImage()
@@ -255,25 +260,40 @@ public partial class MainWindow : Window
         return true;
     }
 
-    private bool LoadWarnFlag()
+    private (bool warn, bool bubble) LoadConfig()
     {
-        if (!File.Exists(WarnFlagFile)) return true; // 默认开
-        return File.ReadAllText(WarnFlagFile) == "1";
+        bool warn = true;     // 默认值
+        bool bubble = true;
+
+        if (!File.Exists(WarnFlagFile)) return (warn, bubble);
+
+        var lines = File.ReadAllLines(WarnFlagFile);
+        foreach (var line in lines)
+        {
+            var parts = line.Split(':');
+            if (parts.Length != 2) continue;
+
+            var key = parts[0].Trim().ToLower();
+            var value = parts[1].Trim().ToLower();
+            bool on = value == "on" || value == "true" || value == "1";
+
+            if (key == "warn") warn = on;
+            else if (key == "bubble") bubble = on;
+        }
+        return (warn, bubble);
     }
 
-    private void SaveWarnFlag(bool on)
+    private void SaveConfig()
     {
-        var dir = Path.Combine(
-            AppDomain.CurrentDomain.BaseDirectory, "Data");
+        var dir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data");
         Directory.CreateDirectory(dir);
-        File.WriteAllText(WarnFlagFile, on ? "1" : "0");
-    }
 
-    private void OnWarnToggle(object sender, RoutedEventArgs e)
-    {
-        SaveWarnFlag(WarnItem.IsChecked);
-    }
+        var warn = WarnItem.IsChecked ? "on" : "off";
+        var bubble = Bubble.IsChecked ? "on" : "off";
 
+        File.WriteAllText(WarnFlagFile, $"warn:{warn}\nbubble:{bubble}");
+    }
+    
     //角色切换实现
     private void ChangeCharaterClick(object sender, RoutedEventArgs e)
     {
@@ -310,11 +330,29 @@ public partial class MainWindow : Window
         _currentPath = "external:" + name;
         LoadImage();
     }
-
-    //Debug 气泡
-    private void OnAboutClick(object sender, RoutedEventArgs e)
+    
+    // Debug 气泡
+    //气泡点击事件方法
+     private void BubbleClick(object sender, RoutedEventArgs e)
+     {
+         OnBubbleLogic();
+     }
+    
+     //气泡生成判断方法
+    private void OnBubbleLogic()
     {
-        bubb = new BubbleLogic(this);
-        bubb.StartStack(Left, Top);
+        if (Bubble.IsChecked)
+        {
+            if (bubblogic==null)
+            {
+                bubblogic = new BubbleLogic(this);
+                bubblogic.StartStack();
+            }
+        }
+        else
+        {
+            bubblogic?.Stop();
+            bubblogic = null;
+        }
     }
 }

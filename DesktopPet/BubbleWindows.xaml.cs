@@ -17,7 +17,7 @@ public partial class BubbleWindows : Window
 
     public void ShowAt(double x, double y, int durationMs = 3000)
     {
-        Left = x;
+        Left = x-100;
         Top = y;
         Show();
 

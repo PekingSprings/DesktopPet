@@ -40,17 +40,18 @@
                 </MenuItem>
                 <MenuItem x:Name="WarnItem" Header="删除前警告"
                           IsCheckable="True" IsChecked="True"
-                          Click="OnWarnToggle" />
+                          />
                 <Separator />
                 <MenuItem x:Name="AutoStartItem" Header="开机自启"
                           IsCheckable="True" Click="OnAutoStartToggle" />
                 <MenuItem x:Name="TopmostItem" Header="置顶"
                           IsCheckable="True" IsChecked="True" Click="OnTopmostToggle" />
+                <MenuItem x:Name="Bubble" Header="开启气泡" IsCheckable="True" IsChecked="True" Click="BubbleClick"/>
                 <Separator />
                 <MenuItem x:Name="ExternalMenu" Header="外部角色" />
                 <Separator />
                 <MenuItem Header="Debug">
-                    <MenuItem Header="测试气泡" Click="OnAboutClick" />
+                    <!-- <MenuItem Header="测试气泡" Click="BubbleClick" /> -->
                 </MenuItem>
                 <MenuItem Header="退出" Click="OnExitClick" />
             </ContextMenu>

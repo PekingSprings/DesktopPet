@@ -16,16 +16,19 @@ public class BubbleLogic
     public BubbleLogic(Window owner)
     {
         _owner = owner;
+        //订阅位置改变事件调用函数
+        _owner.LocationChanged += (s, e) =>
+            UpdateLocation();
     }
 
     private string MessageFile => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Text", "Allvoi.txt");
 
-    public void StartStack(double x, double y)
+    public void StartStack()
     {
         LoadMessage();
         _timer.Interval = TimeSpan.FromMilliseconds(5000);
         _timer.Tick+=(s,e)=>
-            ShowMessage(x,y);
+            ShowMessage(_owner.Left,_owner.Top);
         _timer.Start();
     }
 
@@ -45,5 +48,21 @@ public class BubbleLogic
         string message=_messages[_random.Next(0, _messages.Count)];
         _currentbubble=new BubbleWindows(message);
         _currentbubble.ShowAt(x,y);
+    }
+//气泡位置即时更新
+    public void UpdateLocation()
+    {
+        if(_currentbubble==null) return;
+        double x = _owner.Left;
+        double y = _owner.Top;
+        _currentbubble.Left=x-100;
+        _currentbubble.Top=y;
+    }
+
+    public void Stop()
+    {
+        _timer.Stop();
+        _currentbubble?.Close();
+        _currentbubble=null;
     }
 }

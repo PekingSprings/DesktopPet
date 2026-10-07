@@ -22,7 +22,7 @@
                 Padding="14,10"
                 MaxWidth="220">
             <Border.Effect>
-                <DropShadowEffect Color="Black" Opacity="0.25" BlurRadius="12" ShadowDepth="2"/>
+                <DropShadowEffect Color="Black" Opacity="0.1" BlurRadius="12" ShadowDepth="2"/>
             </Border.Effect>
             <TextBlock x:Name="MessageText"
                        Foreground="#222222"
