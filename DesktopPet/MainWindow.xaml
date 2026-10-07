@@ -1,10 +1,8 @@
 ﻿<Window x:Class="DesktopPet.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:ui="http://schemas.modernwpf.com/2019"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DesktopPet"
         mc:Ignorable="d"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -14,47 +12,50 @@
         ResizeMode="NoResize"
         AllowDrop="True"
         Title="MainWindow" Height="300" Width="200">
-    
+
     <Grid Background="Transparent">
         <Grid.ContextMenu>
             <ContextMenu>
                 <MenuItem Header="大小">
-                    <MenuItem Header="小" Tag="200" Click="OnSizeClick"/>
-                    <MenuItem Header="中" Tag="320" Click="OnSizeClick"/>
-                    <MenuItem Header="大" Tag="420" Click="OnSizeClick"/>
+                    <MenuItem Header="小" Tag="200" Click="OnSizeClick" />
+                    <MenuItem Header="中" Tag="320" Click="OnSizeClick" />
+                    <MenuItem Header="大" Tag="420" Click="OnSizeClick" />
                 </MenuItem>
                 <MenuItem Header="角色">
                     <MenuItem Header="TH6">
-                        <MenuItem Header="露米娅" Tag="6-Rumia" Click="ChangeCharaterClick"/>
-                        <MenuItem Header="琪露诺" Tag="6-Cirno" Click="ChangeCharaterClick"/>
-                        <MenuItem Header="芙兰朵露" Tag="6-Flandre" Click="ChangeCharaterClick"/>
+                        <MenuItem Header="露米娅" Tag="6-Rumia" Click="ChangeCharaterClick" />
+                        <MenuItem Header="琪露诺" Tag="6-Cirno" Click="ChangeCharaterClick" />
+                        <MenuItem Header="芙兰朵露" Tag="6-Flandre" Click="ChangeCharaterClick" />
                     </MenuItem>
                     <MenuItem Header="TH7">
-                        <MenuItem Header="魂魄妖梦" Tag="7-Youmu" Click="ChangeCharaterClick"/>
+                        <MenuItem Header="魂魄妖梦" Tag="7-Youmu" Click="ChangeCharaterClick" />
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="样式">
-                    <MenuItem Header="常服" Tag="0" Click="OnMenuItemClick"/>
-                    <MenuItem Header="生气" Tag="1" Click="OnMenuItemClick"/>
-                    <MenuItem Header="委屈" Tag="2" Click="OnMenuItemClick"/>
-                    <MenuItem Header="开心" Tag="3" Click="OnMenuItemClick"/>
-                    <MenuItem Header="不甘" Tag="4" Click="OnMenuItemClick"/>
+                    <MenuItem Header="常服" Tag="0" Click="OnMenuItemClick" />
+                    <MenuItem Header="生气" Tag="1" Click="OnMenuItemClick" />
+                    <MenuItem Header="委屈" Tag="2" Click="OnMenuItemClick" />
+                    <MenuItem Header="开心" Tag="3" Click="OnMenuItemClick" />
+                    <MenuItem Header="不甘" Tag="4" Click="OnMenuItemClick" />
                 </MenuItem>
                 <MenuItem x:Name="WarnItem" Header="删除前警告"
                           IsCheckable="True" IsChecked="True"
-                          Click="OnWarnToggle"/>
-                <Separator/>
+                          Click="OnWarnToggle" />
+                <Separator />
                 <MenuItem x:Name="AutoStartItem" Header="开机自启"
-                          IsCheckable="True" Click="OnAutoStartToggle"/>
+                          IsCheckable="True" Click="OnAutoStartToggle" />
                 <MenuItem x:Name="TopmostItem" Header="置顶"
-                          IsCheckable="True" IsChecked="True" Click="OnTopmostToggle"/>
-                <Separator/>
-                <MenuItem x:Name="ExternalMenu" Header="外部角色"/>
-                <Separator/>
-                <MenuItem Header="退出" Click="OnExitClick"/>
+                          IsCheckable="True" IsChecked="True" Click="OnTopmostToggle" />
+                <Separator />
+                <MenuItem x:Name="ExternalMenu" Header="外部角色" />
+                <Separator />
+                <MenuItem Header="Debug">
+                    <MenuItem Header="测试气泡" Click="OnAboutClick" />
+                </MenuItem>
+                <MenuItem Header="退出" Click="OnExitClick" />
             </ContextMenu>
         </Grid.ContextMenu>
-        <Image 
-            x:Name="PetImage" Stretch="Uniform"></Image>
+        <Image
+            x:Name="PetImage" Stretch="Uniform" />
     </Grid>
 </Window>

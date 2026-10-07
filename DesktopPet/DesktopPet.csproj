@@ -8,46 +8,61 @@
         <UseWPF>true</UseWPF>
         <SatelliteResourceLanguages>zh-CN;en-US</SatelliteResourceLanguages>
         <InvariantGlobalization>false</InvariantGlobalization>
+        <ApplicationIcon>icon.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
-        <Resource Include="ResImage\TH6\Rumia\1.png" />
-        <Resource Include="ResImage\TH6\Rumia\2.png" />
-        <Resource Include="ResImage\TH6\Rumia\3.png" />
-        <Resource Include="ResImage\TH6\Rumia\4.png" />
-        <Resource Include="ResImage\TH6\Rumia\5.png" />
-        <Resource Include="ResImage\TH6\Rumia\sup.png" />
+        <Resource Include="icon.ico"/>
+        <Resource Include="ResImage\TH6\Rumia\1.png"/>
+        <Resource Include="ResImage\TH6\Rumia\2.png"/>
+        <Resource Include="ResImage\TH6\Rumia\3.png"/>
+        <Resource Include="ResImage\TH6\Rumia\4.png"/>
+        <Resource Include="ResImage\TH6\Rumia\5.png"/>
+        <Resource Include="ResImage\TH6\Rumia\sup.png"/>
 
-        <Resource Include="ResImage\TH6\Cirno\1.png" />
+        <Resource Include="ResImage\TH6\Cirno\1.png"/>
 
-        <Resource Include="ResImage\TH6\Cirno\2.png" />
+        <Resource Include="ResImage\TH6\Cirno\2.png"/>
 
-        <Resource Include="ResImage\TH6\Cirno\3.png" />
+        <Resource Include="ResImage\TH6\Cirno\3.png"/>
 
-        <Resource Include="ResImage\TH6\Cirno\4.png" />
+        <Resource Include="ResImage\TH6\Cirno\4.png"/>
 
-        <Resource Include="ResImage\TH6\Cirno\5.png" />
+        <Resource Include="ResImage\TH6\Cirno\5.png"/>
 
-        <Resource Include="ResImage\TH7\Youmu\1.png" />
+        <Resource Include="ResImage\TH7\Youmu\1.png"/>
 
-        <Resource Include="ResImage\TH7\Youmu\2.png" />
+        <Resource Include="ResImage\TH7\Youmu\2.png"/>
 
-        <Resource Include="ResImage\TH7\Youmu\3.png" />
+        <Resource Include="ResImage\TH7\Youmu\3.png"/>
 
-        <Resource Include="ResImage\TH7\Youmu\4.png" />
+        <Resource Include="ResImage\TH7\Youmu\4.png"/>
 
-        <Resource Include="ResImage\TH7\Youmu\5.png" />
+        <Resource Include="ResImage\TH7\Youmu\5.png"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="ModernWpfUI" Version="0.9.6" />
+        <PackageReference Include="ModernWpfUI" Version="0.9.6"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Data\" />
-      <Folder Include="ExternalChars\" />
-      <Folder Include="ResImage\TH6\Rumia\" />
-      <Folder Include="ResImage\TH8\" />
+        <Folder Include="Data\"/>
+        <Folder Include="ExternalChars\"/>
+        <Folder Include="ResImage\TH6\Rumia\"/>
+        <Folder Include="Windows\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Page Update="BubbleWindows.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="MainWindow.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
     </ItemGroup>
 
 </Project>
