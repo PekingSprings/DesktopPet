@@ -19,29 +19,23 @@
         <Resource Include="ResImage\TH6\Rumia\4.png"/>
         <Resource Include="ResImage\TH6\Rumia\5.png"/>
         <Resource Include="ResImage\TH6\Rumia\sup.png"/>
-
         <Resource Include="ResImage\TH6\Cirno\1.png"/>
-
         <Resource Include="ResImage\TH6\Cirno\2.png"/>
-
         <Resource Include="ResImage\TH6\Cirno\3.png"/>
-
         <Resource Include="ResImage\TH6\Cirno\4.png"/>
-
         <Resource Include="ResImage\TH6\Cirno\5.png"/>
-
         <Resource Include="ResImage\TH7\Youmu\1.png"/>
-
         <Resource Include="ResImage\TH7\Youmu\2.png"/>
-
         <Resource Include="ResImage\TH7\Youmu\3.png"/>
-
         <Resource Include="ResImage\TH7\Youmu\4.png"/>
-
         <Resource Include="ResImage\TH7\Youmu\5.png"/>
+        <None Update="WebGame\**\*">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4258.31" />
         <PackageReference Include="ModernWpfUI" Version="0.9.6"/>
     </ItemGroup>
 

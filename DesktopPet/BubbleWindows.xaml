@@ -7,6 +7,7 @@
         Topmost="True"
         ShowInTaskbar="False"
         ResizeMode="NoResize"
+        ShowActivated="False"
         SizeToContent="WidthAndHeight">
     <Grid Margin="10">
         <Grid.RowDefinitions>

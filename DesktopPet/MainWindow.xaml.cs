@@ -355,4 +355,11 @@ public partial class MainWindow : Window
             bubblogic = null;
         }
     }
+
+    private void GameStart(object sender, RoutedEventArgs e)
+    {
+        GameWindow gameWindow = new GameWindow{Owner =  this};
+        gameWindow.Show();
+        
+    }
 }

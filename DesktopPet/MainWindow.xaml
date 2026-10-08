@@ -50,6 +50,9 @@
                 <Separator />
                 <MenuItem x:Name="ExternalMenu" Header="外部角色" />
                 <Separator />
+                <MenuItem Header="玩游戏">
+                    <MenuItem Header="Pong" Click="GameStart"/>
+                </MenuItem>
                 <MenuItem Header="Debug">
                     <!-- <MenuItem Header="测试气泡" Click="BubbleClick" /> -->
                 </MenuItem>
