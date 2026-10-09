@@ -343,7 +343,7 @@ public partial class MainWindow : Window
     {
         if (Bubble.IsChecked)
         {
-            if (bubblogic==null)
+            if (bubblogic==null)//若未初始化
             {
                 bubblogic = new BubbleLogic(this);
                 bubblogic.StartStack();
@@ -361,5 +361,29 @@ public partial class MainWindow : Window
         GameWindow gameWindow = new GameWindow{Owner =  this};
         gameWindow.Show();
         
+    }
+
+    //Emoji
+    // private void EmojiShow(object sender, RoutedEventArgs e)//待完成
+    // {
+    //     ParticleSystem _partcile = new ParticleSystem(ParticleEmojiCanvas);
+    //     _partcile.ShowParticle(0,0,"❤️");
+    // }
+
+    private void AIhtml(object sender, RoutedEventArgs e)
+    {
+        ChatWindows chatWindows = new ChatWindows(ExtractCharName(_currentPath));
+        chatWindows.Show();
+    }
+    
+    public static string ExtractCharName(string currentPath)
+    {
+        // "internal:TH6/Rumia" → "Rumia"
+        // "external:Minoriko"  → "Minoriko"
+        var parts = currentPath.Split(':');
+        if (parts.Length < 2) return "Unknown";
+        var rest = parts[1];
+        var segs = rest.Split('/');
+        return segs[^1];//^从后往前
     }
 }

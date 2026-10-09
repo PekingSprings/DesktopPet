@@ -53,7 +53,10 @@
                 <MenuItem Header="玩游戏">
                     <MenuItem Header="Pong" Click="GameStart"/>
                 </MenuItem>
+                <MenuItem Header="聊天" Click="AIhtml"/>
                 <MenuItem Header="Debug">
+                    <!-- <MenuItem Header="EMOji" Click="EmojiShow"/> -->
+                    <!-- <MenuItem Header="AIDEBUG" Click="AIhtml"/> -->
                     <!-- <MenuItem Header="测试气泡" Click="BubbleClick" /> -->
                 </MenuItem>
                 <MenuItem Header="退出" Click="OnExitClick" />
@@ -61,5 +64,6 @@
         </Grid.ContextMenu>
         <Image
             x:Name="PetImage" Stretch="Uniform" />
+        <Canvas x:Name="ParticleEmojiCanvas" IsHitTestVisible="False"/>
     </Grid>
 </Window>

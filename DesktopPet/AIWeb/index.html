@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>东方聊天</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="bg-layer"></div>
+<div id="bg-dim"></div>
+
+<div id="app" class="app">
+
+    <!-- ==================== 顶部栏 ==================== -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <div id="char-avatar" class="char-avatar">
+                <img id="char-avatar-img" alt="" />
+                <span id="char-avatar-fallback">东</span>
+            </div>
+            <div class="char-meta">
+                <h1 id="char-name">未指定角色</h1>
+                <p id="char-title">等待宿主程序传入角色信息…</p>
+            </div>
+        </div>
+
+        <div class="topbar-right">
+            <button id="btn-search-toggle" class="tool-btn" title="联网搜索：关">
+                <span class="tool-icon">🌐</span><span class="tool-label">联网</span>
+            </button>
+            <button id="btn-clear" class="tool-btn" title="清空对话">
+                <span class="tool-icon">🧹</span><span class="tool-label">清空</span>
+            </button>
+            <button id="btn-settings" class="tool-btn" title="设置">
+                <span class="tool-icon">⚙️</span><span class="tool-label">设置</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ==================== 消息区 ==================== -->
+    <main id="messages" class="messages">
+        <div id="empty-state" class="empty-state">
+            <div class="empty-glyph">東方Project</div>
+            <p class="empty-title">幻想乡的结界已经展开</p>
+            <p class="empty-sub">说点什么，开始这段对话吧。</p>
+        </div>
+    </main>
+
+    <!-- ==================== 附件与提示 ==================== -->
+    <div id="attachments" class="attachments"></div>
+    <div id="typing-hint" class="typing-hint"></div>
+
+    <!-- ==================== 输入区 ==================== -->
+    <footer class="composer">
+        <div class="composer-inner">
+            <button id="btn-image" class="composer-icon" title="发送图片">🖼️</button>
+            <input type="file" id="file-input" accept="image/*" multiple hidden />
+            <textarea id="input" rows="1" placeholder="说点什么…（Enter 发送 / Shift+Enter 换行）"></textarea>
+            <button id="btn-send" class="send-btn">发送</button>
+        </div>
+    </footer>
+
+</div>
+
+<!-- ==================== 设置面板 ==================== -->
+<div id="settings-mask" class="settings-mask hidden"></div>
+<aside id="settings-panel" class="settings-panel hidden">
+    <header class="settings-header">
+        <h3>设置</h3>
+        <button id="btn-settings-close" class="icon-btn">✕</button>
+    </header>
+
+    <div class="settings-body">
+        <section class="cfg-group">
+            <h4>模型接口</h4>
+            <label>Base URL
+                <input id="cfg-base-url" type="text" placeholder="https://api.openai.com/v1" />
+            </label>
+            <label>API Key
+                <input id="cfg-api-key" type="password" placeholder="sk-... （本地模型可留空）" />
+            </label>
+            <label>聊天模型
+                <input id="cfg-model" type="text" placeholder="gpt-4o-mini" />
+            </label>
+            <label>视觉模型（图片识别用）
+                <input id="cfg-vision-model" type="text" placeholder="gpt-4o-mini" />
+            </label>
+        </section>
+
+        <section class="cfg-group">
+            <h4>联网搜索</h4>
+            <label>搜索通道
+                <select id="cfg-search-provider">
+                    <option value="webview">交给宿主程序（C# / WebView2）</option>
+                    <option value="searxng">SearXNG 自建实例</option>
+                    <option value="tavily">Tavily API</option>
+                    <option value="off">关闭</option>
+                </select>
+            </label>
+            <label>SearXNG 地址
+                <input id="cfg-search-endpoint" type="text" placeholder="http://localhost:8080" />
+            </label>
+            <label>Tavily API Key
+                <input id="cfg-search-key" type="password" placeholder="tvly-..." />
+            </label>
+            <label>结果条数
+                <input id="cfg-search-max" type="number" min="1" max="10" value="5" />
+            </label>
+        </section>
+
+        <section class="cfg-group">
+            <h4>背景</h4>
+            <div class="cfg-row">
+                <button id="btn-bg-file" class="mini-btn">选择本地图片</button>
+                <button id="btn-bg-clear" class="mini-btn">清除背景</button>
+            </div>
+            <input type="file" id="bg-file-input" accept="image/*" hidden />
+            <label>背景图 URL
+                <input id="cfg-bg-url" type="text" placeholder="https://... 或 file:///..." />
+            </label>
+            <label>背景暗度
+                <input id="cfg-bg-dim" type="range" min="0" max="90" value="40" />
+                <span id="bg-dim-val" class="range-val">40%</span>
+            </label>
+        </section>
+
+        <section class="cfg-group">
+            <h4>角色补充（宿主传入的名字/称号优先）</h4>
+            <label>立绘 URL
+                <input id="cfg-char-avatar" type="text" placeholder="留空则显示名字首字" />
+            </label>
+            <label>额外人设
+                <textarea id="cfg-char-persona" rows="3" placeholder="追加到角色设定后，可留空"></textarea>
+            </label>
+        </section>
+
+        <button id="btn-save-settings" class="primary-btn">保存设置</button>
+        <p class="tip">设置保存在本机 localStorage，不会上传。</p>
+    </div>
+</aside>
+
+<script src="script.js"></script>
+</body>
+</html>

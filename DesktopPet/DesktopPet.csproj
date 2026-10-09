@@ -29,6 +29,9 @@
         <Resource Include="ResImage\TH7\Youmu\3.png"/>
         <Resource Include="ResImage\TH7\Youmu\4.png"/>
         <Resource Include="ResImage\TH7\Youmu\5.png"/>
+        <None Update="AIWeb\**\*">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
         <None Update="WebGame\**\*">
     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
   </None>
@@ -40,6 +43,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="AIWeb\Avater\" />
         <Folder Include="Data\"/>
         <Folder Include="ExternalChars\"/>
         <Folder Include="ResImage\TH6\Rumia\"/>
