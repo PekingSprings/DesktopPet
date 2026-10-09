@@ -156,6 +156,46 @@
         }
     };
 
+    /* 英文名 → 中文名对照，用于提示词和界面显示 */
+    const NAME_CN = {
+        'Rumia': '露米娅',
+        'Cirno': '琪露诺',
+        'Daiyousei': '大妖精',
+        'Meiling': '红美铃',
+        'Koakuma': '小恶魔',
+        'Patchouli': '帕秋莉',
+        'Sakuya': '十六夜咲夜',
+        'Remilia': '蕾米莉亚',
+        'Flandre': '芙兰朵露',
+        'Letty': '蕾蒂',
+        'Chen': '橙',
+        'Alice': '爱丽丝',
+        'Lily': '莉莉白',
+        'Lunasa': '露娜萨',
+        'Merlin': '梅露兰',
+        'Lyrica': '莉莉卡',
+        'Youmu': '魂魄妖梦',
+        'Yuyuko': '西行寺幽幽子',
+        'Ran': '八云蓝',
+        'Yukari': '八云紫',
+        'Suika': '伊吹萃香',
+        'Reisen': '铃仙',
+        'Eirin': '八意永琳',
+        'Kaguya': '蓬莱山辉夜',
+        'Mokou': '藤原妹红',
+        'Aya': '射命丸文',
+        'Sanae': '东风谷早苗',
+        'Kanako': '八坂神奈子',
+        'Suwako': '洩矢诹访子',
+        'Minoriko': '秋穰子',
+        'Shizuha': '秋静叶',
+        'Satori': '古明地觉',
+        'Koishi': '古明地恋',
+        'Byakuren': '圣白莲',
+        'Futo': '物部布都',
+        'Miko': '丰聪耳神子'
+    };
+
     /* ---------------- 状态 ---------------- */
 
     let settings = Object.assign({}, DEFAULT_SETTINGS);
@@ -272,7 +312,7 @@
         character = {
             name: base.name || '',
             title: base.title || preset.title || '',
-            avatar: base.avatar || '',
+            avatar: base.avatar || (base.name ? 'Avatar/' + base.name + '.png' : ''),
             persona: persona
         };
     }
@@ -349,10 +389,11 @@
 
     function buildSystemPrompt() {
         const parts = [];
+        const cnName = NAME_CN[character.name] || character.name;   // ← 加这行
 
         if (character.name) {
             parts.push(
-                '你现在扮演东方Project（Touhou Project）中的角色「' + character.name + '」' +
+                '你现在扮演东方Project（Touhou Project）中的角色「' + cnName + '」' +
                 (character.title ? '（' + character.title + '）' : '') + '。'
             );
         } else {
@@ -862,7 +903,7 @@
         empty.className = 'empty-state';
         empty.id = 'empty-state';
         empty.innerHTML =
-            '<div class="empty-glyph">東</div>' +
+            '<div class="empty-glyph">東方Project</div>' +
             '<p class="empty-title"></p>' +
             '<p class="empty-sub">说点什么，开始这段对话吧。</p>';
         el.messages.appendChild(empty);

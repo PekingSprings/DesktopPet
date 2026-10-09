@@ -43,7 +43,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="AIWeb\Avater\" />
         <Folder Include="Data\"/>
         <Folder Include="ExternalChars\"/>
         <Folder Include="ResImage\TH6\Rumia\"/>

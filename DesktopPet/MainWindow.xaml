@@ -38,15 +38,16 @@
                     <MenuItem Header="开心" Tag="3" Click="OnMenuItemClick" />
                     <MenuItem Header="不甘" Tag="4" Click="OnMenuItemClick" />
                 </MenuItem>
-                <MenuItem x:Name="WarnItem" Header="删除前警告"
-                          IsCheckable="True" IsChecked="True"
-                          />
-                <Separator />
-                <MenuItem x:Name="AutoStartItem" Header="开机自启"
-                          IsCheckable="True" Click="OnAutoStartToggle" />
-                <MenuItem x:Name="TopmostItem" Header="置顶"
-                          IsCheckable="True" IsChecked="True" Click="OnTopmostToggle" />
-                <MenuItem x:Name="Bubble" Header="开启气泡" IsCheckable="True" IsChecked="True" Click="BubbleClick"/>
+                <MenuItem Header="外观">
+                    <MenuItem x:Name="WarnItem" Header="删除前警告"
+                              IsCheckable="True" IsChecked="True"
+                    />
+                    <MenuItem x:Name="AutoStartItem" Header="开机自启"
+                              IsCheckable="True" Click="OnAutoStartToggle" />
+                    <MenuItem x:Name="TopmostItem" Header="置顶"
+                              IsCheckable="True" IsChecked="True" Click="OnTopmostToggle" />
+                    <MenuItem x:Name="Bubble" Header="开启气泡" IsCheckable="True" IsChecked="True" Click="BubbleClick"/>
+                </MenuItem>
                 <Separator />
                 <MenuItem x:Name="ExternalMenu" Header="外部角色" />
                 <Separator />
@@ -54,11 +55,13 @@
                     <MenuItem Header="Pong" Click="GameStart"/>
                 </MenuItem>
                 <MenuItem Header="聊天" Click="AIhtml"/>
+                <MenuItem Header="Music" Click="MusicOnClick"/>
                 <MenuItem Header="Debug">
                     <!-- <MenuItem Header="EMOji" Click="EmojiShow"/> -->
                     <!-- <MenuItem Header="AIDEBUG" Click="AIhtml"/> -->
                     <!-- <MenuItem Header="测试气泡" Click="BubbleClick" /> -->
                 </MenuItem>
+                <Separator/>
                 <MenuItem Header="退出" Click="OnExitClick" />
             </ContextMenu>
         </Grid.ContextMenu>

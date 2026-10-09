@@ -356,6 +356,7 @@ public partial class MainWindow : Window
         }
     }
 
+    //玩游戏
     private void GameStart(object sender, RoutedEventArgs e)
     {
         GameWindow gameWindow = new GameWindow{Owner =  this};
@@ -370,7 +371,7 @@ public partial class MainWindow : Window
     //     _partcile.ShowParticle(0,0,"❤️");
     // }
 
-    private void AIhtml(object sender, RoutedEventArgs e)
+    private void AIhtml(object sender, RoutedEventArgs e)//AI聊天
     {
         ChatWindows chatWindows = new ChatWindows(ExtractCharName(_currentPath));
         chatWindows.Show();
@@ -385,5 +386,11 @@ public partial class MainWindow : Window
         var rest = parts[1];
         var segs = rest.Split('/');
         return segs[^1];//^从后往前
+    }
+
+    private void MusicOnClick(object sender, RoutedEventArgs e)
+    {
+        MusicPlayer musicPlayer = new MusicPlayer();
+        musicPlayer.Show();
     }
 }
