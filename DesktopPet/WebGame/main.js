@@ -21,7 +21,7 @@ window.addEventListener("keydown", (e) => {
     if (e.key === "Enter"&&paused===false) {
         if (ball.vx===0&&ball.vy===0){
             ball.vx=5;
-            ball.vy=5;
+            ball.vy=4;
         }
     }
     if (e.key === "r"&&paused===true) {
@@ -149,7 +149,7 @@ function loop(){
 }
 function judge(){
     if(paused===false){
-        if(leftsocre===10||rightsocre===10){
+        if(leftsocre===5||rightsocre===5){
             Stop()
         }
     }

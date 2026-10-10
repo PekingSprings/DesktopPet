@@ -26,7 +26,7 @@ public class BubbleLogic
     public void StartStack()
     {
         LoadMessage();
-        _timer.Interval = TimeSpan.FromMilliseconds(5000);
+        _timer.Interval = TimeSpan.FromMilliseconds(10000);
         _timer.Tick+=(s,e)=>
             ShowMessage(_owner.Left,_owner.Top);
         _timer.Start();

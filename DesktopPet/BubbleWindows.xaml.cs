@@ -22,8 +22,10 @@ public partial class BubbleWindows : Window
         Show();
 
         var timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(durationMs) };
+        timer.Start();
         timer.Tick += (s, e) =>
         {
+            Close();
             timer.Stop();
         };
         

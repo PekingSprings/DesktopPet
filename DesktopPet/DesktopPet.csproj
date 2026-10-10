@@ -32,20 +32,30 @@
         <None Update="AIWeb\**\*">
     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
   </None>
+        <None Update="MusicPlayist\**\*">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
+        <None Update="Text\**\*">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  </None>
         <None Update="WebGame\**\*">
     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
   </None>
+
+  
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4258.31" />
         <PackageReference Include="ModernWpfUI" Version="0.9.6"/>
+        <PackageReference Include="TagLibSharp2" Version="0.6.0" />
     </ItemGroup>
 
     <ItemGroup>
         <Folder Include="Data\"/>
         <Folder Include="ExternalChars\"/>
         <Folder Include="ResImage\TH6\Rumia\"/>
+        <Folder Include="Text\" />
         <Folder Include="Windows\"/>
     </ItemGroup>
 
