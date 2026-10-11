@@ -20,6 +20,8 @@ public partial class MainWindow : Window
 
     private DispatcherTimer _sadTimer;
     private BubbleLogic bubblogic;
+    
+    private MusicPlayer? musicPlayer;
 
     public MainWindow()
     {
@@ -390,7 +392,14 @@ public partial class MainWindow : Window
 
     private void MusicOnClick(object sender, RoutedEventArgs e)
     {
-        MusicPlayer musicPlayer = new MusicPlayer();
-        musicPlayer.Show();
+        if (musicPlayer==null||!musicPlayer.IsLoaded)
+        {
+            musicPlayer = new MusicPlayer();
+            musicPlayer.Show();
+        }
+        else
+        {
+            musicPlayer.Activate();
+        }
     }
 }

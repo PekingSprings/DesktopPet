@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using ModernWpf.Controls;
 using System.Windows.Threading;
 namespace DesktopPet;
@@ -17,6 +18,8 @@ public partial class MusicPlayer : Window
         var musicLibrary = new MusicLibrary();
         musicLibrary.LoadMusicList();
         AlbumTree.ItemsSource=musicLibrary.Albums;
+        
+        VolumeSlider.Value=mediaPlayer.Volume;
         
         var _timetick=new DispatcherTimer();
         _timetick.Interval=TimeSpan.FromMilliseconds(500);
@@ -63,7 +66,7 @@ public partial class MusicPlayer : Window
         var element = (MusicLibrary.MusicAttribute)grid.DataContext;
         _musicPath = element.songpath;
         ChangerSongsButton();
-        LoadArtistandDurationandtitle(element.Artist, element.Title, element.Duration);
+        LoadArtistandDurationandtitle(element.Artist, element.Title, element.Duration, element.ParentAlbum);
 
     }
 
@@ -73,8 +76,9 @@ public partial class MusicPlayer : Window
         base.OnClosed(e);
     }
 
-    public void LoadArtistandDurationandtitle(string artist, string title, TimeSpan? duration)
+    public void LoadArtistandDurationandtitle(string artist, string title, TimeSpan? duration,MusicLibrary.Album parentAlbum)
     {
+        CoverImage.Source=parentAlbum.Cover;
         TitleText.Text = title;
         ArtistText.Text=artist;
         TotalTimeText.Text=duration?.ToString(@"m\:ss");
@@ -92,4 +96,11 @@ public partial class MusicPlayer : Window
         }
        
     }
+
+    public void VolumeSlider_ValueChanged(object sender, EventArgs e)
+    {
+        var value = VolumeSlider.Value;
+        mediaPlayer.Volume = value;
+    }
+    
 }

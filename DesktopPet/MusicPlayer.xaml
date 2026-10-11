@@ -4,7 +4,7 @@
         xmlns:ui="http://schemas.modernwpf.com/2019"
         Title="音乐播放器"
         ui:WindowHelper.UseModernWindowStyle="True"
-        Width="800" Height="540"
+        Width="800" Height="700"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip"
         MinWidth="640" MinHeight="420">
@@ -146,14 +146,8 @@
                     Margin="0,0,0,18">
                 <Grid>
                     <Image x:Name="CoverImage"
-                           Stretch="UniformToFill"
+                           Stretch="Uniform"
                            Margin="1" />
-                    <TextBlock x:Name="CoverPlaceholder"
-                               Text="♪"
-                               FontSize="72"
-                               Foreground="#66FFFFFF"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center" />
                 </Grid>
             </Border>
 
@@ -241,7 +235,8 @@
                             Minimum="0"
                             Maximum="1"
                             Value="0.7"
-                            VerticalAlignment="Center" />
+                            VerticalAlignment="Center" 
+                            ValueChanged="VolumeSlider_ValueChanged"/>
                 </StackPanel>
             </Grid>
         </Grid>

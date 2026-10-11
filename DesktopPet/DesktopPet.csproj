@@ -41,6 +41,22 @@
         <None Update="WebGame\**\*">
     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
   </None>
+        <Resource Include="Coverimage\TH6cover.png" />
+        <Resource Include="Coverimage\TH7cover.png" />
+        <Resource Include="Coverimage\TH8cover.png" />
+        <Resource Include="Coverimage\TH9cover.png" />
+        <Resource Include="Coverimage\TH10cover.png" />
+        <Resource Include="Coverimage\TH11cover.png" />
+        <Resource Include="Coverimage\TH12cover.png" />
+        <Resource Include="Coverimage\TH13cover.png" />
+        <Resource Include="Coverimage\TH14cover.png" />
+        <Resource Include="Coverimage\TH15cover.png" />
+        <Resource Include="Coverimage\TH16cover.png" />
+        <Resource Include="Coverimage\TH17cover.png" />
+        <Resource Include="Coverimage\TH18cover.png" />
+        <Resource Include="Coverimage\TH19cover.png" />
+        <Resource Include="Coverimage\TH20cover.png" />
+
 
   
     </ItemGroup>
